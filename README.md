@@ -10,6 +10,8 @@ The .bat file is a one-click installer/launcher that registers itself in the Reg
 
 On each run, the batch file downloads the latest discordfsooff.ps1 PowerShell script from this repository, executes it hidden, and then deletes the .ps1 file (keeping your system clean).
 
+A temporary VBScript file is created and used to launch the PowerShell script truly hidden and make no windows ever stay open in the desktop. The VBScript file (runfso.vbs) is saved in %temp%, used, and then automatically deleted as part of the process.
+
 The PowerShell script runs in the background, monitoring your Discord installation. When Discord updates or the executable changes, it automatically disables Full Screen Optimization for the newest version.
 
 The process needs no user attention after initial setup—it’s fully invisible.
@@ -22,8 +24,14 @@ The process needs no user attention after initial setup—it’s fully invisible
 
 ## Installation Guide
 1. Download discordfsoautopatch.bat (the batch file) from this repository.
-2. Double-click the .bat file to run it.
-3. That's it!
+2. Run with admin or just double click the .bat file to run it (because there is an automatic admin rights check).
+3. On first launch, Windows may show a Security Warning ("Unknown Publisher") — you must click Launch/Run to continue.
+4. A Command Prompt window will briefly open.
+5. A second security prompt will appear, just confirm Launch/Run again.
+6. Administrator Permission Required: If you didn't launch as admin, you will be asked for admin rights to make registry changes for autostart. Click Yes/Run if prompted.
+7. After permissions, a command window will briefly appear (2-3 seconds), then close.
+8. The patch is now fully installed!
+- The patch will automatically work in the background and on future system startups, with no windows or prompts from now on.
 
 ## Uninstallation Guide
 1. Press Win + R, type regedit and press Enter.
